@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Common Disease Prediction Model</title>
+    <style>
+      body {
+        background: linear-gradient(to bottom, #222222, #444444);
+        color: #fff;
+        font-family: sans-serif;
+        display: flex;
+        min-height: 100vh;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .centered-box {
+        width: 600px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background: linear-gradient(to bottom, #222222, #444444);
+      }
+
+      .title {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="text-center mb-5">Symptom Selection</h1>
+    <div class="container-fluid">
+      <div class="centered-box">
+        <form action="result">
+          <div class="mb-3">
+            <label for="dropdown1" class="form-label">Symptom 1</label>
+            <select class="form-select" id="dropdown1" name="dropdown1" required>
+              <option value="">Select...</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="dropdown2" class="form-label">Symptom 2</label>
+            <select class="form-select" id="dropdown2" name="dropdown2" >
+              <option value="">Select...</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="dropdown3" class="form-label">Symptom 3</label>
+            <select class="form-select" id="dropdown3" name="dropdown3">
+              <option value="">Select...</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="dropdown4" class="form-label">Symptom 4</label>
+            <select class="form-select" id="dropdown4" name="dropdown4" >
+              <option value="">Select...</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="dropdown5" class="form-label">Symptom 5</label>
+            <select class="form-select" id="dropdown5" name="dropdown5">
+              <option value="">Select...</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="reset" class="btn btn-secondary">Reset</button>
+        </form>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    const symptomList = [
+      "itching",
+      "skin_rash",
+      "nodal_skin_eruptions",
+      "continuous_sneezing",
+      "shivering",
+      "chills",
+      "joint_pain",
+      "stomach_pain",
+      "acidity",
+      "ulcers_on_tongue",
+      "muscle_wasting",
+      "vomiting",
+      "burning_micturition",
+      "fatigue",
+      "weight_gain",
+      "anxiety",
+      "cold_hands_and_feets",
+      "mood_swings",
+      "weight_loss",
+      "restlessness",
+      "lethargy",
+      "patches_in_throat",
+      "irregular_sugar_level",
+      "cough",
+      "high_fever",
+      "sunken_eyes",
+      "breathlessness",
+      "sweating",
+      "dehydration",
+      "indigestion",
+      "headache",
+      "yellowish_skin",
+      "dark_urine",
+      "nausea",
+      "loss_of_appetite",
+      "pain_behind_the_eyes",
+      "back_pain",
+      "constipation",
+      "abdominal_pain",
+      "diarrhoea",
+      "mild_fever",
+      "yellow_urine",
+      "yellowing_of_eyes",
+      "acute_liver_failure",
+      "fluid_overload",
+      "swelling_of_stomach",
+      "swelled_lymph_nodes",
+      "malaise",
+      "blurred_and_distorted_vision",
+      "phlegm",
+      "throat_irritation",
+      "redness_of_eyes",
+      "sinus_pressure",
+      "runny_nose",
+      "congestion",
+      "chest_pain",
+      "weakness_in_limbs",
+      "fast_heart_rate",
+      "pain_during_bowel_movements",
+      "pain_in_anal_region",
+      "bloody_stool",
+      "irritation_in_anus",
+      "neck_pain",
+      "dizziness",
+      "cramps",
+      "bruising",
+      "obesity",
+      "swollen_legs",
+      "swollen_blood_vessels",
+      "puffy_face_and_eyes",
+      "enlarged_thyroid",
+      "brittle_nails",
+      "swollen_extremeties",
+      "excessive_hunger",
+      "extra_marital_contacts",
+      "drying_and_tingling_lips",
+      "slurred_speech",
+      "knee_pain",
+      "hip_joint_pain",
+      "muscle_weakness",
+      "stiff_neck",
+      "swelling_joints",
+      "movement_stiffness",
+      "spinning_movements",
+      "loss_of_balance",
+      "unsteadiness",
+      "weakness_of_one_body_side",
+      "loss_of_smell",
+      "bladder_discomfort",
+      "continuous_feel_of_urine",
+      "passage_of_gases",
+      "internal_itching",
+      "toxic_look_(typhos)",
+      "depression",
+      "irritability",
+      "muscle_pain",
+      "altered_sensorium",
+      "red_spots_over_body",
+      "belly_pain",
+      "abnormal_menstruation",
+      "watering_from_eyes",
+      "increased_appetite",
+      "polyuria",
+      "family_history",
+      "mucoid_sputum",
+      "rusty_sputum",
+      "lack_of_concentration",
+      "visual_disturbances",
+      "receiving_blood_transfusion",
+      "receiving_unsterile_injections",
+      "coma",
+      "stomach_bleeding",
+      "distention_of_abdomen",
+      "history_of_alcohol_consumption",
+      "blood_in_sputum",
+      "prominent_veins_on_calf",
+      "palpitations",
+      "painful_walking",
+      "pus_filled_pimples",
+      "blackheads",
+      "scurring",
+      "skin_peeling",
+      "silver_like_dusting",
+      "small_dents_in_nails",
+      "inflammatory_nails",
+      "blister",
+      "red_sore_around_nose",
+      "yellow_crust_ooze",
+      "prognosis",
+    ];
+
+    const dropdownElements = document.querySelectorAll(".form-select");
+
+    dropdownElements.forEach((dropdown) => {
+      symptomList.forEach((symptom) => {
+        const option = document.createElement("option");
+        option.value = symptom;
+        option.text = symptom;
+        dropdown.appendChild(option);
+      });
+    });
+  </script>
+</html>
